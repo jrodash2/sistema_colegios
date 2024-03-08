@@ -1,0 +1,13 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+	<title>bg</title>
+	<defs>
+		<image  width="36" height="36" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAMAAADW3miqAAAAAXNSR0IB2cksfwAAAU1QTFRF+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sT+6sTaIE3aQAAAG90Uk5TAB5hm8He8PHhxqFqJkev/v+6UzS/zEJ4iqa5s8edXnYPpRgoiJjtAScyX10kJeJugh/Wk6D93dzuq66qjyqcCkB9B/cNsEzlrbjqE/Mtmfw7CfvYK28E46w88slywvb4w4BZ69dcEBU3UWJlUjgXAQZkCwAAAUZJREFUeJyF1GdXwjAUBuALDhCtvYgWEAcOULSIE+tAVAT33nvv8f8/2jaWpLVp3m835zlp7k1OAZj4/DW1dfWBYEOosQncIzXLSBNucSGRVnSkTXGaqJMYidlN3M0gtrMm4W4QO6jp5BnEhGW6+Aaxm5ikl0H0majHG4UN0+ttEPt01C9CKR0FRSg9AIMig5iBIVoMq2o2q0ZGnCgHo7QYIyMZd6IJmKTFVF7PtPbvc3GYEZ9p1jZKLa1VwyzPwTzbBZMCfaYLkKNIKjJZpGgJFGZfmQmzLMFySXRueQWgLELGM1BEqGL0kfc2q2azgq0qZCRrXmbdGtwG3wSKf2Zzi4+2rY12uGR3zzL7BzxzeFS9ymOeSZ3Q+z51J2fnzJvwk7WLy9BV9PqGFLd39wXbX+fh8akce868mMXr2/vH59f3j03AL3xDWNl9LVZFAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+		.s0 { fill: #ffffff } 
+	</style>
+	<g id="Folder 1">
+		<path id="bg" class="s0" d="m30 0c16.6 0 30 13.4 30 30 0 16.6-13.4 30-30 30-16.6 0-30-13.4-30-30 0-16.6 13.4-30 30-30z"/>
+		<use id="Icon " href="#img1" x="12" y="12"/>
+	</g>
+</svg>

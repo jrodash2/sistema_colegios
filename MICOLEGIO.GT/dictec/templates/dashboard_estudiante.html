@@ -1,0 +1,58 @@
+{% extends 'base_estudiante.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1> Hola {{user.first_name}} </h1>
+
+
+
+{% for calificacion in calificaciones %}
+<div class="accordion card" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        {{calificacion.curso}}      {{calificacion.grado}} 
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div class="table-responsive">
+                                        
+          <table class="table table-hover" id="pc-dt-simple">
+
+              <tbody>
+                <thead>
+                  <tr>
+                      <th>Bloque I</th>
+                      <th>Bloque II</th>
+                      <th>Bloque III</th>
+                      <th>Bloque IV</th>
+                      <th>Promedio</th>
+                    
+                  </tr>
+              </thead>
+                              
+                  <tr>
+                     
+                      <td>{{calificacion.mark_1}}</td>
+                      <td>{{calificacion.mark_2}}</td>
+                      <td>{{calificacion.mark_3}}</td>
+                      <td>{{calificacion.mark_4}}</td>
+                      <td>{{calificacion.average}}</td>
+                      
+                  </tr>
+                         
+              </tbody>
+          </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endfor %}
+
+
+{% endblock %}

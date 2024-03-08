@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1> Calificaciones </h1>
+
+
+<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+method="GET">
+  {% csrf_token %}
+  <div class="input-group">
+    <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{ request.POST.buscar }}">
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="submit">
+        <i class="fas fa-search fa-sm"></i>
+      </button>
+    </div>
+  </div>
+</form>
+
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ sample-page ] start -->
+                            <div class="col-sm-12">
+                                <div class="card table-card">
+                                    <div class="card-body">
+                                        <div class="text-end p-4 pb-sm-2">
+                                            <a href="#" class="btn btn-primary d-inline-flex align-item-center" data-bs-toggle="modal" data-bs-target="#customer-edit_add-modal">
+                                                <i class="ti ti-plus f-18"></i> Add Customer
+                                            </a>
+                                        </div>
+                                        <div class="table-responsive">
+                                        
+                                            <table class="table table-hover" id="pc-dt-simple">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Curso</th>
+                                                        <th>Alumno</th>
+                                                        <th>Carrera</th>
+                                                        <th>Docente</th>
+                                                        <th>Acciones</th>
+                                                      
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    {% for calificacion in calificaciones %}
+
+                                                 
+                                                    <tr>
+                                                        <td>{{calificacion.curso}}</td>
+                                                        <td>
+                                                            <div class="row">
+                                                               
+                                                                <div class="col">
+                                                                    <h6 class="mb-0">{{calificacion.estudiante}} </h6>
+                                                                    
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{calificacion.grado}}</td>
+                                                        <td>{{calificacion.docente.nombre}}</td>
+                                                        <td><a href=" " class="btn btn-shadow btn-link">Editar</a><a href=" " class="btn btn-shadow btn-link">Imprimir</a></td>
+                                                    </tr>
+                                                    {% endfor %}
+ 
+                                                   
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ sample-page ] end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                  
+
+
+
+{% endblock %}

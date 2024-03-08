@@ -1,0 +1,77 @@
+{% extends 'ind.html' %}
+{% load static %}
+
+{% block content %}
+
+
+        
+<!-- [ breadcrumb ] start -->
+<div class="page-header">
+    <div class="page-block">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="page-header-title">
+            <h2 class="mb-0">Demos</h2>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<!-- [ breadcrumb ] end -->
+  
+<!-- [ Main Content ] start -->
+  <div class="row">
+    
+   
+    <div class="col-md-12 col-xxl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">Curso</th>
+                <th scope="col">Evaluación 1</th>
+                <th scope="col">Evaluación 2</th>
+                <th scope="col">Evaluación 3</th>
+                <th scope="col">Evaluación 4</th>
+                <th scope="col">Promedio</th>
+               
+              </tr>
+              </thead>
+              <tbody>
+              {% for mark in marks %}
+                <tr>
+                  <th scope="row">{{ mark.grado }}</th>
+                  <td>{{ mark.mark_1 }}</td>
+                  <td>{{ mark.mark_2 }}</td>
+                  <td>{{ mark.mark_3 }}</td>
+                  <td>{{ mark.mark_4 }}</td>
+                  <td><strong>{{ mark.average }}</strong></td>
+                  {% comment %} <td>
+                    <a class="btn btn-sm btn-primary {% if course.status == 'I' or course.status == 'F' %}disabled{% endif %}"
+                       href="{% url 'update_mark' data.mark_id %}">Agregar Nota</a>
+                  </td> {% endcomment %}
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <a href=" " class="btn btn-shadow btn-link">Editar</a>
+            {% comment %} <a href="{% url 'colegio_tarjeta' grado.id %} " class="btn btn-shadow btn-link">Imprimir</a> {% endcomment %}
+            <a href=" " class="btn btn-shadow btn-link">Finalizar</a>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+   
+  </div>
+<!-- [ Main Content ] end -->
+
+
+
+{% endblock %}

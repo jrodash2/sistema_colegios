@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="w-full lg:w-1/2 ">
+
+</div>
+    {{error}}
+
+    <section class="pc-container">
+        <div class="pc-content">
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <!-- [ date-form ] start -->
+            <div class="col-md-8">
+              <div class="card">
+                <div class="card-body">
+                  <h5>Ingresar Notas</h5>
+                  <span class="d-block m-t-5">Llena todos los campos requeridos</span>
+                </div>
+                <div class="card-body">
+                  <form action="/cursos/crear_nota/" method="POST">
+                    {% csrf_token %}
+                
+                        {{ form.as_p }}
+
+                  
+                        <div class="d-grid mt-4">
+                            <button class="btn btn-primary">Crear Nota</button>
+                        </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- [ date-form ] end -->
+           
+        </div>
+    </div>
+    
+
+
+
+{% endblock %}
+

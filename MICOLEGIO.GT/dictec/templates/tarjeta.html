@@ -1,0 +1,128 @@
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="different types of invoice/bill/tally designed with friendly and markup using modern technology, you can use it on any type of website invoice, fully responsive and w3 validated.">
+    <meta name="keywords" content="bill , receipt, tally, invoice, cash memo, invoice html, invoice pdf, invoice print, invoice templates, multipurpose invoice, template, booking invoice, general invoice, clean invoice, catalog, estimate, proposal">
+    <meta name="author" content="initTheme">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>initBill - invoice & Receipt HTML Template </title>
+    <link rel="icon" type="image/x-icon" sizes="20x20" href="assets/images/icon/favicon.png">
+    
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main-stylec.css' %}">
+</head>
+
+
+<body class="section-bg-one">
+  <main class="container invoice-wrapper" id="download-section">
+      <!-- invoice Top -->
+      <div class="card-headers d-flex flex-wrap gap-15 align-items-center justify-content-between mb-6">
+          <div class="logo">
+
+              <img src="{% static 'images/encabezado.png' %}" class="img">
+
+          </div>
+          <div class="title">
+              <div class="row">
+                  <span class="status d-block text-capitalize" style="font-size: larger; margin-top: 6px;"><strong>Nombre: </strong>{{ calificacion.usuario.first_name}} {{ calificacion.usuario.last_name}}</span>
+                  
+                  <div class="col-sm-12">
+                      <div class="invoice-details">
+                          <span class="status d-block text-capitalize" style="font-size: larger;"><strong>Grado: </strong>  {{calificacion.grado.nombre}}</span>
+
+                      </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="invoice-details">
+                        <span class="status d-block text-capitalize" style="font-size: larger;"><strong>Año: </strong> 2024</span>
+
+                    </div>
+                </div>
+
+              </div>
+          </div>
+      </div>
+      <!-- invoice Description -->
+      <div class="card-body mb-4 border-top pt-25 mt-30">
+
+      </div>
+      <!-- invoice Table -->
+      <div class="table-responsive invoice-table mb-4">
+          <table class="table table-striped"> 
+            
+                <thead>
+                <tr>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Bloque I</th>
+                    <th scope="col">Bloque II</th>
+                    <th scope="col">Bloque III</th>
+                    <th scope="col">Bloque IV</th>
+                    <th scope="col">Promedio</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr>
+                        <th scope="row">{{ calificacion.curso }}</th>
+                        <td>{{ calificacion.mark_1 }}</td>
+                        <td>{{ calificacion.mark_2 }}</td>
+                        <td>{{ calificacion.mark_3 }}</td>
+                        <td>{{ calificacion.mark_4 }}</td>
+                        <td><strong>{{ calificacion.average }}</strong></td>
+                        
+                    </tr>
+              
+                </tbody>
+            </table>
+      
+      </div>
+
+      <h5 class="mb-2 text-primary"> Observaciones: </h5>
+      <div class="card">
+          <div class="card-body">
+              <div class="d-flex align-items-center">
+                  <div class="flex-shrink-0">
+
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, harum reprehenderit? Distinctio.
+                      </p>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+      <br>
+      <div class="logo">
+
+
+          <img src="{% static 'images/pie.png' %}" class="pie">
+
+      </div>
+  </main>
+  <!-- invoice Bottom  -->
+  <div class="text-center mt-5 mb-4 regular-button">
+      <div class="d-print-none d-flex justify-content-center flex-wrap gap-10">
+          <button id="bill-download" class="btn-primary-outline">Download</button>
+          <a href="javascript:window.print()" class="btn-primary-fill">Print Invoice</a>
+      </div>
+  </div>
+
+    <!-- jquery-->
+    <script src="{% static 'js/jquery-3.7.0.minc.js' %}"></script>
+    <!-- Plugin -->
+    <script src="{% static 'js/pluginc.js' %}"></script>
+    <!-- Main js-->
+    <script src="{% static 'js/mianc.js' %}"></script>
+</body>
+</html>
+
+{% endblock %}
