@@ -129,7 +129,7 @@
     <nav class="pc-sidebar">
       <div class="navbar-wrapper">
         <div class="m-header">
-          <a href="{% url 'cursos' %}"  class="b-brand text-primary">
+          <a href="{% url 'dashboard_administracion' %}"  class="b-brand text-primary">
             <!-- ========   Change your logo from here   ============ -->
 
             <img
@@ -213,138 +213,37 @@
                           
                       </ul>
                   </li>
-                  <li class="pc-item pc-hasmenu">
-                      <a href="#!" class="pc-link">Perito Contador<span class="pc-arrow"><i data-feather="chevron-right"></i></span
-    ></a>
-                      <ul class="pc-submenu">
-                          <li class="pc-item"><a class="pc-link" href="#!">Contabilidad I /4PC</a></li>
-                          <li class="pc-item"><a class="pc-link" href="#!">Contabilidad II /4PC</a></li>
-                          <li class="pc-item"><a class="pc-link" href="#!">Ingles I /4PC</a></li>
-                          
-                      </ul>
-                  </li>
-                  <li class="pc-item pc-hasmenu">
-                    <a href="#!" class="pc-link">Basicos<span class="pc-arrow"><i data-feather="chevron-right"></i></span
-  ></a>
-                    <ul class="pc-submenu">
-                        <li class="pc-item"><a class="pc-link" href="#!">Matematica I /1B</a></li>
-                        <li class="pc-item"><a class="pc-link" href="#!">Contabilidad /2B</a></li>
-                        <li class="pc-item"><a class="pc-link" href="#!">Ingles /2B</a></li>
-                        
-                    </ul>
-                </li>
+                 
               </ul>
           </li>
+          <li class="pc-item pc-hasmenu">
+            <a  href="{% url 'facturas' %}" class="pc-link">
+              <span class="pc-micon">
+                <svg class="pc-icon">
+                  <use xlink:href="#custom-status-up"></use>
+                </svg>
+              </span>
+              <span class="pc-mtext">Estados de Cuenta</span>
+            
+            
+            </a>
+          </li>
 
-            <li class="pc-item pc-hasmenu">
-              <a href="#!" class="pc-link">
-                <span class="pc-micon">
-                  <svg class="pc-icon">
-                    <use xlink:href="#custom-status-up"></use>
-                  </svg>
-                </span>
-                <span class="pc-mtext">Permisos</span>
-                <span class="pc-arrow"
-                  ><i data-feather="chevron-right"></i
-                ></span>
-              
-              </a>
-              <ul class="pc-submenu">
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/index.html">Nivel Básico</a>
-                </li>
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/analytics.html"
-                    >Administracion de Empresas</a
-                    
-                  >
-                </li>
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/analytics.html"
-                    >Perito En Computación</a
-                    
-                  >
-                </li>
-              </ul>
-            </li>
-
-            <li class="pc-item pc-hasmenu">
-              <a href="#!" class="pc-link">
-                <span class="pc-micon">
-                  <svg class="pc-icon">
-                    <use xlink:href="#custom-document"></use>
-                  </svg>
-                </span>
-                <span class="pc-mtext">Pagos Alumnos</span>
-                
-                <span class="pc-arrow"
-                  ><i data-feather="chevron-right"></i
-                ></span>
-              </a>
-              <ul class="pc-submenu">
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/index.html">Nivel Básico</a>
-                </li>
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/analytics.html"
-                    >Administracion de Empresas</a
-                    
-                  >
-                </li>
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/analytics.html"
-                    >Perito En Computación</a
-                    
-                  >
-                </li>
-              </ul>
-            </li>
-
-            <li class="pc-item pc-hasmenu">
-              <a href="#!" class="pc-link">
-                <span class="pc-micon">
-                  <svg class="pc-icon">
-                    <use xlink:href="#custom-status-up"></use>
-                  </svg>
-                </span>
-                <span class="pc-mtext">Est. de Cuenta Alumnos</span>
-                <span class="pc-arrow"
-                  ><i data-feather="chevron-right"></i
-                ></span>
-              
-              </a>
-              <ul class="pc-submenu">
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/index.html">Nivel Básico</a>
-                </li>
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/analytics.html"
-                    >Administracion de Empresas</a
-                    
-                  >
-                </li>
-                <li class="pc-item">
-                  <a class="pc-link" href="../dashboard/analytics.html"
-                    >Perito En Computación</a
-                    
-                  >
-                </li>
-              </ul>
-            </li>
-
-            <li class="pc-item pc-hasmenu">
-              <a href="#!" class="pc-link">
-                <span class="pc-micon">
-                  <svg class="pc-icon">
-                    <use xlink:href="#custom-status-up"></use>
-                  </svg>
-                </span>
-                <span class="pc-mtext">Alumnos Destacado</span>
-                
-              
-              </a>
-                              
-            </li>
+          <li class="pc-item pc-hasmenu">
+            <a  href="{% url 'lista_cobros_por_alumno' %}" class="pc-link">
+              <span class="pc-micon">
+                <svg class="pc-icon">
+                  <use xlink:href="#custom-status-up"></use>
+                </svg>
+              </span>
+              <span class="pc-mtext">Cobros</span>
+            
+            
+            </a>
+          </li>
+            
+          
+           
             <li class="pc-item pc-hasmenu">
               <a href="#!" class="pc-link">
                 <span class="pc-micon">
@@ -394,19 +293,7 @@
                
               </li>
              
-              <li class="pc-item pc-hasmenu">
-                <a href="#!" class="pc-link">
-                  <span class="pc-micon">
-                    <svg class="pc-icon">
-                      <use xlink:href="#custom-status-up"></use>
-                    </svg>
-                  </span>
-                  <span class="pc-mtext">Padres</span>
-                
-                
-                </a>
-               
-              </li>
+              
 
             </li>
           </ul>

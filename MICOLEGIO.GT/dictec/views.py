@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User, Group, GroupManager
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from datetime import datetime
 from django.utils import timezone
@@ -13,13 +13,20 @@ from django. contrib import messages
 from django.db.models import Q
 from rest_framework.filters import SearchFilter, OrderingFilter
 
-
+from .models import CobroMensual
+from datetime import date
 
 from dictec.models import Curso
 from dictec.models import Calificacion
+from dictec.models import Estudiante
 from dictec.models import Docente
-
 from .forms import CalificacionForm
+from .forms import CobroMensualForm
+from .forms import ModificarCobroMensualForm
+from django.contrib.auth.decorators import user_passes_test
+
+def in_grupo_especifico(user):
+    return user.groups.filter(name='Administrativo').exists()
 
 # Create your views here.
 
@@ -53,7 +60,8 @@ def signup(request):
 
 def home(request):
     return render(request,'home.html')
-   
+
+@login_required
 def dashboard(request):
     return render(request,'dashboard.html')
 
@@ -73,10 +81,11 @@ def dashboard(request):
 
 #     return render(request, 'clientes.html', {'clientes':clientes})
 
-
+@login_required 
+@user_passes_test(in_grupo_especifico)
 def dashboard_administracion(request):
     busqueda = request.GET.get("buscar")
-    calificaciones = Calificacion.objects.all()
+    calificaciones = Calificacion.objects.all().exclude(activo=False).order_by("grado")
 
     if busqueda:
         calificaciones = Calificacion.objects.filter(
@@ -104,14 +113,67 @@ def imprimir(request):
    return render(request, 'imprimir.html', {'calificaciones': calificaciones})  
     
 def cursos(request):
-    calificaciones = Calificacion.objects.filter(docente__nombre='Juan Alfredo Marroquin Alvarez').exclude(activo=False).order_by("grado")
+ # Obtener la instancia de Docente asociada al usuario actualmente logeado
+    usuario_actual = request.user
+    docente = Docente.objects.get(usuario=usuario_actual)
+    # Obtener todas las calificaciones del docente actualmente logeado
+    calificaciones = Calificacion.objects.filter(docente=docente)
+    return render(request, 'cursos.html', {'calificaciones': calificaciones})
 
-    return render(request, 'cursos.html', {'calificaciones': calificaciones})  
+
+# def cursosadmin(request):
+#     calificaciones = Calificacion.objects.filter().exclude(activo=False).order_by("grado")
+
+#     return render(request, 'cursosadmin.html', {'calificaciones': calificaciones})  
+
+
+
+
+
+def facturas(request):
+    busqueda = request.GET.get("buscar")
+    estudiantes = Estudiante.objects.all().exclude(activo=False).order_by("grado")
+
+    if busqueda:
+        estudiantes = Estudiante.objects.filter(
+            Q(usuario__username__icontains = busqueda) | 
+            Q(grado__nombre__icontains = busqueda) 
+        ).distinct()
+    return render(request, 'contabilidad.html', {'estudiantes': estudiantes})  
+    
     
 def notas(request, c_id):
     calificacion = Calificacion.objects.get(pk=c_id)
     return render(request, 'tarjeta.html', {'calificacion': calificacion})
 
+
+def estado_decuenta(request):
+    cobros = CobroMensual.objects.filter(usuario=request.user).order_by("fecha_limite")
+    hoy = date.today()
+    for cobro in cobros:
+        if not cobro.pagado and cobro.fecha_limite < hoy:
+            cobro.mora = True
+        else:
+            cobro.mora = False
+    return render(request, 'estado_decuenta.html', { 'cobros': cobros})
+       
+        
+ 
+def edit_notad(request, nd_id):
+    if request.method == 'GET':
+        calificacion = get_object_or_404(Calificacion, pk=nd_id)
+        form = CalificacionForm(instance=calificacion)
+        return render(request, 'edit_notad.html', {'calificacion': calificacion, 'form': form})  
+    else:
+        calificacion = get_object_or_404(Calificacion, pk=nd_id)
+        form = CalificacionForm(request.POST, request.FILES, instance=calificacion)
+        form.save()
+        return redirect('cursos')
+      
+    
+       
+       
+       
         
 def dashboard_estudiante(request):
     calificaciones = Calificacion.objects.filter(usuario=request.user).exclude(activo=False)
@@ -129,6 +191,20 @@ def crear_nota(request):
         new_dic.user = request.user
         new_dic.save()
         return redirect('cursos')
+    
+          
+def crear_notad(request):
+    if request.method == 'GET':
+        return render(request, 'crear_notad.html', {
+            'form': CalificacionForm
+        })
+    else:
+        form = CalificacionForm(request.POST)
+        new_dic = form.save(commit=False)
+        new_dic.user = request.user
+        new_dic.save()
+        return redirect('cursos')
+    
  
 def editar_nota(request, n_id):
     if request.method == 'GET':
@@ -140,7 +216,6 @@ def editar_nota(request, n_id):
         form = CalificacionForm(request.POST, request.FILES, instance=calificacion)
         form.save()
         return redirect('cursos')
-      
 
 def signout(request):
     logout(request)
@@ -168,7 +243,7 @@ def signin(request):
             for g in data:
                 print(g.name)
                 if g.name=='Administrativo':
-                   return redirect('cursos')
+                   return redirect('dashboard_administracion')
                
                 elif g.name=='Docentes':
                        return redirect('cursos')
@@ -178,3 +253,52 @@ def signin(request):
                     return redirect('home')
         
        
+def cobros_alumno(request, cobro_id):
+    alumno = Estudiante.objects.get(pk=cobro_id)
+    cobros = CobroMensual.objects.filter(alumno=alumno).order_by("fecha_limite")
+    hoy = date.today()
+    for cobro in cobros:
+        if not cobro.pagado and cobro.fecha_limite < hoy:
+            cobro.mora = True
+        else:
+            cobro.mora = False
+    return render(request, 'resumencuenta.html', {'alumno': alumno, 'cobros': cobros})
+       
+
+
+
+def ingresar_cobro(request):
+    if request.method == 'POST':
+        form = CobroMensualForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('facturas')  # Redirigir a la lista de cobros después de guardar el nuevo cobro
+    else:
+        form = CobroMensualForm()
+    return render(request, 'ingresar_cobro.html', {'form': form})
+
+
+
+def lista_cobros_por_alumno(request):
+    
+    alumnos = Estudiante.objects.all()
+    cobros_por_alumno = {}
+    for alumno in alumnos:
+        cobros_por_alumno[alumno] = CobroMensual.objects.filter(alumno=alumno).order_by("fecha_limite")
+
+    return render(request, 'lista_cobros.html', {'cobros_por_alumno': cobros_por_alumno})
+
+
+
+
+def modificar_cobro(request, cobro_id):
+    cobro = get_object_or_404(CobroMensual, pk=cobro_id)
+    if request.method == 'POST':
+        form = ModificarCobroMensualForm(request.POST, instance=cobro)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_cobros_por_alumno')  # Redirigir a la lista de cobros después de guardar los cambios
+    else:
+        form = ModificarCobroMensualForm(instance=cobro)
+    return render(request, 'modificar_cobro.html', {'form': form})
+

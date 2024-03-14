@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>Listado de Cobros Mensuales por Alumno</h1>
+
+
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <!-- [ sample-page ] start -->
+                            <div class="col-sm-12">
+                                <div class="card table-card">
+                                    <div class="card-body">
+                                        <div class="text-end p-4 pb-sm-2">
+                                            <div class="text-end p-4 pb-sm-2">
+                                                <a href="{% url 'ingresar_cobro' %}" class="btn btn-shadow btn-link">Ingresar Cobro</a>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            
+                                            {% for alumno, cobros in cobros_por_alumno.items %}
+                                                <h2>{{ alumno.nombre }}</h2>
+                                            <table class="table table-hover" id="pc-dt-simple">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Cobro</th>
+                                                        <th>Monto</th>
+                                                        <th>Fecha Límite</th>
+                                                        <th>Pagado</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for cobro in cobros %}
+                                                        <tr>
+                                                            <td>{{ cobro.mes }}</td>
+                                                            <td>{{ cobro.monto }}</td>
+                                                            <td>{{ cobro.fecha_limite }}</td>
+                                                            <td>{% if cobro.pagado %} Sí {% else %} No {% endif %}</td>
+                                                            <td><a href="{% url 'modificar_cobro' cobro.id %}" class="btn btn-shadow btn-link">Modificar Cobro</a></td>
+                                                            
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- [ sample-page ] end -->
+                        </div>
+                        <!-- [ Main Content ] end -->
+                  
+
+
+
+{% endblock %}
+
+
+
+
+
+
+<!-- lista_cobros.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Listado de Cobros Mensuales por Alumno</title>
+</head>
+<body>
+    <h1>Listado de Cobros Mensuales por Alumno</h1>
+    {% for alumno, cobros in cobros_por_alumno.items %}
+        <h2>{{ alumno.nombre }}</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Mes</th>
+                    <th>Monto</th>
+                    <th>Fecha Límite</th>
+                    <th>Pagado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cobro in cobros %}
+                    <tr>
+                        <td>{{ cobro.mes }}</td>
+                        <td>{{ cobro.monto }}</td>
+                        <td>{{ cobro.fecha_limite }}</td>
+                        <td>{% if cobro.pagado %} Sí {% else %} No {% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+</body>
+</html>

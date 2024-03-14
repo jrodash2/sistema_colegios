@@ -15,20 +15,16 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-body">
-                  <h5>Editar Notas</h5>
-                  <span class="d-block m-t-5">Modificar todos los campos requeridos</span>
+                  <h5>Ingresar Nuevo Cobro Mensual</h5>
+                  <span class="d-block m-t-5">Llena todos los campos requeridos</span>
                 </div>
                 <div class="card-body">
-                  <form  method="POST">
-                    {% csrf_token %}
-                
+                   
+                    <form method="post">
+                        {% csrf_token %}
                         {{ form.as_p }}
-
-                  
-                        <div class="d-grid mt-4">
-                            <button class="btn btn-primary">Guardar Cambios</button>
-                        </div>
-                  </form>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </form>
                 </div>
               </div>
             </div>

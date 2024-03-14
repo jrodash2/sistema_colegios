@@ -1,0 +1,30 @@
+<!-- cobros_alumno.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cobros del Alumno</title>
+</head>
+<body>
+    <h1>Cobros del Alumno: {{ alumno.nombre }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Mes</th>
+                <th>Monto</th>
+                <th>Fecha Límite</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cobro in cobros %}
+                <tr>
+                    <td>{{ cobro.mes }}</td>
+                    <td>{{ cobro.monto }}</td>
+                    <td>{{ cobro.fecha_limite }}</td>
+                    <td>{% if cobro.pagado %} Pagado {% elif cobro.mora %} En mora {% else %} Pendiente {% endif %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

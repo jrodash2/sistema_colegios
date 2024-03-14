@@ -1,0 +1,95 @@
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="different types of invoice/bill/tally designed with friendly and markup using modern technology, you can use it on any type of website invoice, fully responsive and w3 validated.">
+    <meta name="keywords" content="bill , receipt, tally, invoice, cash memo, invoice html, invoice pdf, invoice print, invoice templates, multipurpose invoice, template, booking invoice, general invoice, clean invoice, catalog, estimate, proposal">
+    <meta name="author" content="initTheme">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estado de Cuenta </title>
+    <link rel="icon" type="image/x-icon" sizes="20x20" href="icon/favicon.png">
+
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main-stylec.css' %}">
+</head>
+
+<body class="section-bg-one">
+    <main class="container invoice-wrapper" id="download-section">
+        <!-- invoice Top -->
+        <div class="row justify-content-between">
+            <div class="col-sm-3">
+                <div class="invoice-logo mb-4">
+                    <img src="{% static 'images/estadodecuenta.png' %}" class="img">
+                </div>
+            </div>
+            <div class="col-sm-10">
+                <div class="invoice-details mb-3">
+                    <h4 class="invoice-details-title text-18 mb-15">Estado de Cuenta de: {{ alumno.nombre }}</h4>
+                    <h4 class="invoice-details-title text-18 mb-15">Information</h4>
+                    <div class="invoice-details-inner">
+                        <p class="invoice-details-para"> <strong>Grado :</strong> {{ alumno.grado }}</p>
+                        <p class="invoice-details-para"><strong>Carrera :</strong>{{ alumno.carrera }}</p>
+                        <p class="invoice-details-para"><strong>CUI :</strong> {{ alumno.usuario }}</p>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <!-- invoice Description -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="table-responsive invoice-table mb-20 mt-30">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Cobro</th>
+                                <th>Description</th>
+                                <th>Monto</th>
+                                <th>Fecha Límite</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cobro in cobros %}
+                                <tr>
+                                    <td>{{ cobro.mes }}</td>
+                                    <td>{{ cobro.descripccion }}</td>
+                                    <td>{{ cobro.monto }}</td>
+                                    <td>{{ cobro.fecha_limite }}</td>
+                                    <td>{% if cobro.pagado %} Pagado {% elif cobro.mora %} En mora {% else %} Pendiente {% endif %}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+              
+            </div>
+        </div>
+
+    </main>
+    <!-- invoice Bottom  -->
+    <div class="text-center mt-5 mb-4 regular-button">
+        <div class="d-print-none d-flex justify-content-center flex-wrap gap-10">
+            <button id="bill-download" class="btn-primary-outline">Download</button>
+            <a href="javascript:window.print()" class="btn-primary-fill">Print Invoice</a>
+        </div>
+    </div>
+
+<!-- jquery-->
+<script src="{% static 'js/jquery-3.7.0.minc.js' %}"></script>
+<!-- Plugin -->
+<script src="{% static 'js/pluginc.js' %}"></script>
+<!-- Main js-->
+<script src="{% static 'js/mianc.js' %}"></script>
+</body>
+
+</html>
+
+{% endblock %}

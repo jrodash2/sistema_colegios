@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 
-from .models import  Ciclo, Carrera, Grado, Curso, Calificacion, Docente, Estudiante
+from .models import  Ciclo, Carrera, Grado, Curso, Calificacion, Docente, Estudiante, CobroMensual
 
 # modelos
 
@@ -43,3 +43,8 @@ class EstudianteAdmin(admin.ModelAdmin):
     readonly_fields = ('activo',)
     list_display = ( 'nombre', 'activo',)
 admin.site.register(Estudiante, EstudianteAdmin)
+
+admin.site.register(CobroMensual)
+
+
+

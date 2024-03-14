@@ -1,23 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'base_docente.html' %}
 {% load static %}
 
 {% block content %}
 
-<h1> Calificaciones </h1>
+<h1> Bienvenido {{user.first_name}} {{user.last_name}} </h1>
 
 
-<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-method="GET">
-  {% csrf_token %}
-  <div class="input-group">
-    <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..." name="buscar" value="{{ request.POST.buscar }}">
-    <div class="input-group-append">
-      <button class="btn btn-primary" type="submit">
-        <i class="fas fa-search fa-sm"></i>
-      </button>
-    </div>
-  </div>
-</form>
 
                         <!-- [ Main Content ] start -->
                         <div class="row">
@@ -26,9 +14,7 @@ method="GET">
                                 <div class="card table-card">
                                     <div class="card-body">
                                         <div class="text-end p-4 pb-sm-2">
-                                            <div class="text-end p-4 pb-sm-2">
-                                                <a href="{% url 'crear_nota' %}" class="btn btn-shadow btn-link">Crear Nota</a>
-                                            </div>
+                                            <a href="{% url 'crear_nota' %}" class="btn btn-shadow btn-link">Crear Nota</a>
                                         </div>
                                         <div class="table-responsive">
                                         
@@ -37,9 +23,8 @@ method="GET">
                                                     <tr>
                                                         <th>Curso</th>
                                                         <th>Alumno</th>
-                                                        <th>CUI</th>
-                                                        <th>Carrera</th>
-                                                        <th>Docente</th>
+                                                        <th>Grado</th>
+                                                 
                                                         <th>Acciones</th>
                                                       
                                                     </tr>
@@ -51,7 +36,6 @@ method="GET">
                                                  
                                                     <tr>
                                                         <td>{{calificacion.curso}}</td>
-                                                       
                                                         <td>
                                                             <div class="row">
                                                                
@@ -62,10 +46,11 @@ method="GET">
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>{{calificacion.estudiante.usuario}}</td>
                                                         <td>{{calificacion.grado}}</td>
-                                                        <td>{{calificacion.docente.nombre}}</td>
+                                             
                                                         <td>  <a href="{% url 'editar_nota' calificacion.id %}" class="btn btn-shadow btn-link">Editar</a></td>
+                                                       
+                                                        {% comment %} <td> <a href="{% url 'notas' calificacion.id %} " class="btn btn-shadow btn-link">Imprimir</a> <a href="{% url 'editar_nota' calificacion.id %}" class="btn btn-shadow btn-link">Editar</a></td> {% endcomment %}
                                                     </tr>
                                                     {% endfor %}
  
@@ -80,7 +65,6 @@ method="GET">
                         </div>
                         <!-- [ Main Content ] end -->
                   
-
 
 
 {% endblock %}

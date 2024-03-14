@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h1> Hola {{user.first_name}} </h1>
+
 
                         <!-- [ Main Content ] start -->
                         <div class="row">
@@ -11,22 +11,18 @@
                           <div class="col-sm-12">
                               <div class="card table-card">
                                   <div class="card-body">
-                                      <div class="text-end p-4 pb-sm-2">
-                                        <a href="{% url 'imprimir' %}" class="btn btn-shadow btn-link">Ver Tarjeta</a>
-
-                                      </div>
 
 
 
 
 
 
-{% for calificacion in calificaciones %}
+
 <div class="accordion card" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        {{calificacion.curso}}      {{calificacion.grado}} 
+        <h1>Estado de Cuenta</h1>
       </button>
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -35,30 +31,26 @@
                                         
           <table class="table table-hover" id="pc-dt-simple">
 
-              <tbody>
-                <thead>
+            
+              <thead>
                   <tr>
-                      <th>Bloque I</th>
-                      <th>Bloque II</th>
-                      <th>Bloque III</th>
-                      <th>Bloque IV</th>
-                      <th>Promedio</th>
-                     
-                    
+                      <th>Cobro</th>
+                      <th>Description</th>
+                      <th>Monto</th>
+                      <th>Fecha Límite</th>
+                      <th>Estado</th>
                   </tr>
               </thead>
-                              
-                  <tr>
-                     
-                      <td>{{calificacion.mark_1}}</td>
-                      <td>{{calificacion.mark_2}}</td>
-                      <td>{{calificacion.mark_3}}</td>
-                      <td>{{calificacion.mark_4}}</td>
-                      <td>{{calificacion.average}}</td>
-                  
-
-                  </tr>
-                         
+              <tbody>
+                  {% for cobro in cobros %}
+                      <tr>
+                          <td>{{ cobro.mes }}</td>
+                          <td>{{ cobro.descripccion }}</td>
+                          <td>{{ cobro.monto }}</td>
+                          <td>{{ cobro.fecha_limite }}</td>
+                          <td>{% if cobro.pagado %} Pagado {% elif cobro.mora %} En mora {% else %} Pendiente {% endif %}</td>
+                      </tr>
+                  {% endfor %}
               </tbody>
           </table>
       </div>
@@ -68,7 +60,7 @@
 </div>
 
 
-{% endfor %}
+
 
 </div>
 </div>

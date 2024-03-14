@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-
          
 # etiqueta / ciclo
 
@@ -64,6 +63,7 @@ class Grado (models.Model):
 
 class Docente(models.Model):
       nombre = models.CharField(max_length=200, verbose_name='Nombre')
+      usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuario')
       telefono = models.CharField(max_length=8, verbose_name='Telefono')
       direccion = models.CharField(max_length=200, verbose_name='Direccion')
       cargo = models.CharField(max_length=200, verbose_name='Cargo')
@@ -130,11 +130,11 @@ class Estudiante(models.Model):
 class Calificacion(models.Model):
       publicado =models.DateTimeField(auto_now_add=True, verbose_name='Fecha de Creación')
       # campos relacionados
-      carrera = models.ForeignKey(Carrera, on_delete=models.CASCADE, verbose_name='Carrera')
-      grado = models.ForeignKey(Grado, on_delete=models.CASCADE, verbose_name='Grado')
+      carrera = models.ForeignKey(Carrera, related_name="carrera", on_delete=models.CASCADE, verbose_name='Carrera')
+      grado = models.ForeignKey(Grado,  on_delete=models.CASCADE, verbose_name='Grado')
       curso = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name='Curso')
       docente = models.ForeignKey(Docente, on_delete=models.CASCADE, verbose_name='Docente')
-      estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE, verbose_name='Estudiante')
+      estudiante = models.ForeignKey(Estudiante, related_name="Estudiante",on_delete=models.CASCADE, verbose_name='Estudiante')
       usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuario')
       activo = models.BooleanField(default=True, verbose_name='Activo')
         
@@ -171,7 +171,35 @@ class Calificacion(models.Model):
       def __str__(self):
             return str(self.curso)
 
-            
+
+
+
+              
+class CobroMensual(models.Model):
+    alumno = models.ForeignKey(Estudiante, on_delete=models.CASCADE, verbose_name='Estudiante')
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuario')
+    SEMESTER_CHOICES = ( 
+    ("Inscripccion", "Inscripccion"), 
+    ("Col-Enero", "Col-Enero"), 
+    ("Col-Febrero", "Col-Febrero"), 
+    ("Col-Marzo", "Col-Marzo"), 
+    ("Col-Abril", "Col-Abril"), 
+    ("Col-Mayo", "Col-Mayo"), 
+    ("Col-Junio", "Col-Junio"), 
+    ("Extraordinario", "Extraordinario"), 
+) 
+    mes = models.CharField( 
+        max_length = 20, 
+        choices = SEMESTER_CHOICES, 
+        default = 'Inscripccion'
+        ) 
+    descripccion = models.CharField(max_length=200, null=True, blank=True)
+    monto = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha_limite = models.DateField()
+    pagado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.alumno.nombre} - {self.mes}"
 
 
 

@@ -15,18 +15,18 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-body">
-                  <h5>Editar Notas</h5>
-                  <span class="d-block m-t-5">Modificar todos los campos requeridos</span>
+                  <h5>Recibir Pago</h5>
+                  <span class="d-block m-t-5">habilita el check cuando recibas el pago </span>
                 </div>
                 <div class="card-body">
-                  <form  method="POST">
+                  <form method="post">
                     {% csrf_token %}
                 
                         {{ form.as_p }}
 
                   
                         <div class="d-grid mt-4">
-                            <button class="btn btn-primary">Guardar Cambios</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                         </div>
                   </form>
                 </div>
@@ -36,7 +36,7 @@
            
         </div>
     </div>
-    
+   
 
 
 

@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h1> Calificaciones </h1>
+<h1> Estados de Cuenta</h1>
 
 
 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
@@ -27,7 +27,7 @@ method="GET">
                                     <div class="card-body">
                                         <div class="text-end p-4 pb-sm-2">
                                             <div class="text-end p-4 pb-sm-2">
-                                                <a href="{% url 'crear_nota' %}" class="btn btn-shadow btn-link">Crear Nota</a>
+                                                <a href="{% url 'ingresar_cobro' %}" class="btn btn-shadow btn-link">Ingresar Cobro</a>
                                             </div>
                                         </div>
                                         <div class="table-responsive">
@@ -35,37 +35,37 @@ method="GET">
                                             <table class="table table-hover" id="pc-dt-simple">
                                                 <thead>
                                                     <tr>
-                                                        <th>Curso</th>
-                                                        <th>Alumno</th>
+                                                        <th>Estudiante</th>
                                                         <th>CUI</th>
+                                                        <th>Grado</th>
                                                         <th>Carrera</th>
-                                                        <th>Docente</th>
                                                         <th>Acciones</th>
                                                       
                                                     </tr>
                                                 </thead>
                                                 <tbody>
 
-                                                    {% for calificacion in calificaciones %}
+                                                    {% for estudiante in estudiantes %}
 
                                                  
                                                     <tr>
-                                                        <td>{{calificacion.curso}}</td>
+                                                        <td>{{estudiante.nombre}}</td>
                                                        
                                                         <td>
                                                             <div class="row">
                                                                
                                                                 <div class="col">
-                                                                    <h6 class="mb-0">{{calificacion.estudiante}} </h6>
+                                                                    <h6 class="mb-0">{{estudiante.usuario}} </h6>
                                                                     
                                                                     
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td>{{calificacion.estudiante.usuario}}</td>
-                                                        <td>{{calificacion.grado}}</td>
-                                                        <td>{{calificacion.docente.nombre}}</td>
-                                                        <td>  <a href="{% url 'editar_nota' calificacion.id %}" class="btn btn-shadow btn-link">Editar</a></td>
+                                                        <td>{{estudiante.grado}}</td>
+                                                        <td>{{estudiante.carrera}}</td>
+                                                       
+                                                      
+                                                        <td>  <a href="{% url 'cobros_alumno' estudiante.id %}" class="btn btn-shadow btn-link">Estado de Cuenta</a>  </td>
                                                     </tr>
                                                     {% endfor %}
  

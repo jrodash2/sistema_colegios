@@ -1,0 +1,48 @@
+<!-- crear_factura.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Factura</title>
+    <script>
+        var itemsSeleccionados = [];
+
+        function agregarItem(itemId, descripcion) {
+            itemsSeleccionados.push({id: itemId, descripcion: descripcion});
+            actualizarListaSeleccionados();
+        }
+
+        function actualizarListaSeleccionados() {
+            var lista = document.getElementById('selected-items-list');
+            lista.innerHTML = '';
+            itemsSeleccionados.forEach(function(item) {
+                var listItem = document.createElement('li');
+                listItem.textContent = item.descripcion;
+                lista.appendChild(listItem);
+            });
+
+            var inputItems = document.getElementById('input-items');
+            inputItems.value = JSON.stringify(itemsSeleccionados.map(item => item.id));
+        }
+    </script>
+</head>
+<body>
+    <h1>Crear Nueva Factura</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <h2>Seleccionar Items:</h2>
+        <ul id="items-list">
+            {% for item in items %}
+                <li onclick="agregarItem('{{ item.id }}', '{{ item.descripcion }}')">{{ item.descripcion }} - {{ item.monto }}</li>
+            {% endfor %}
+        </ul>
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Items Seleccionados:</h2>
+    <ul id="selected-items-list"></ul>
+    <input type="hidden" id="input-items" name="items" value="">
+</body>
+</html>

@@ -14,7 +14,7 @@
                                 <div class="card table-card">
                                     <div class="card-body">
                                         <div class="text-end p-4 pb-sm-2">
-                                            <a href="{% url 'crear_nota' %}" class="btn btn-shadow btn-link">Crear Nota</a>
+                                            <a href="{% url 'crear_notad' %}" class="btn btn-shadow btn-link">Crear Nota</a>
                                         </div>
                                         <div class="table-responsive">
                                         
@@ -48,7 +48,7 @@
                                                         </td>
                                                         <td>{{calificacion.grado}}</td>
                                              
-                                                        <td>  <a href="{% url 'editar_nota' calificacion.id %}" class="btn btn-shadow btn-link">Editar</a></td>
+                                                        <td>  <a href="{% url 'edit_notad' calificacion.id %}" class="btn btn-shadow btn-link">Editar</a></td>
                                                        
                                                         {% comment %} <td> <a href="{% url 'notas' calificacion.id %} " class="btn btn-shadow btn-link">Imprimir</a> <a href="{% url 'editar_nota' calificacion.id %}" class="btn btn-shadow btn-link">Editar</a></td> {% endcomment %}
                                                     </tr>
